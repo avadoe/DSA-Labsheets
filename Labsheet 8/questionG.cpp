@@ -26,5 +26,15 @@ int main()
     for(int i = 0; i < n; i++)
         cout << points[i].x << " " << points[i].y << endl;
 
-    
+    for(int i = 0; i < n; i++){
+        for(int j = i + 1; j < n; j++){
+            double slope = (double)((points[j].y - points[i].y)/(points[j].x - points[i].x));
+
+            vector<double> slopes;
+
+            for(int k = j + 1; k < n; k++){
+                
+            }
+        }
+    }
 }
