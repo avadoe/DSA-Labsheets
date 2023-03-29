@@ -5,17 +5,36 @@ int main()
 {
     int n;
     cin >> n;
+    vector<int> number(n);
 
     string A;
     cin >> A;
 
-    vector<int> number(n);
+    for(int i = 0; i < n; i++){
+        char c = A[i];
 
-    for(int i = 0; i < A.size(); i++)
-        number[i] = A[i] - '0';   
+        number[i] = c - '0';
+    }
 
-    for(int i = 0; i < number.size(); i++)
-        cout << number[i] ;
+    int left, right;
 
-    cout << endl;
+    if(n % 2 == 0){
+        left = n / 2 - 1;
+        right = n / 2;
+    }else{
+        left = n / 2;
+        right = n / 2;
+    }
+
+    while(left >= 0 && number[left] == number[right]){
+        left--;
+        right++;
+    }
+
+    if(left > 0 && number[left] > number[right]){
+        bool isEven = (n % 2 == 0);
+        int carry = 1;
+
+        number[left] += carry;
+    }
 }
