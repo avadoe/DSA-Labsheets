@@ -1,33 +1,31 @@
-// WRONG
-
 #include <iostream>
 #include <vector>
 #include <unordered_map>
 using namespace std;
-
-int main() {
-    int n;
+int main()
+{
+    int n; 
     cin >> n;
 
-    vector<int> arr(n);
-    for (int i = 0; i < n; i++)
-        cin >> arr[i];
+    vector<int> a(n);
+
+    for(int i = 0; i < n; i++)
+        cin >> a[i];
 
     int x, y;
     cin >> x >> y;
 
     unordered_map<int, int> freq;
-    int ans = 0;
+    int count = 0;
 
-    for(int j = 0; j < n; j++){
-        freq[y * j - arr[j]]++;
+    for(int i = 0; i < n; i++){
+        int diff = (a[i] - x * i) - (a[0] - y * 0);
+        if(freq.find(diff) != freq.end()){
+            count += freq[diff];
+        }
+
+        freq[(a[i] - x * i) - (a[0] - y * 0)]++;
     }
 
-    for(auto x : freq){
-        int y = x.second;
-        ans += y * (y - 1) / 2;
-    }
-
-    cout << ans << endl;
-    return 0;
+    cout << count << endl;
 }
