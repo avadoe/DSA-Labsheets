@@ -2,67 +2,49 @@
 
 #include <iostream>
 #include <vector>
+#include <set>
 using namespace std;
 int main()
 {
     long long n, q;
     cin >> n >> q;
 
-    vector<long long> arr(n, 0);
+    vector<long long> arr(n);
 
-   long long k, q_type, x, start, end, ans;
+    while(q--){
+        long long type, k;
+        cin >> type >> k;
 
-   for(int i = 0; i < q; i++){
-        cin >> q_type >> k;
-
-        switch (q_type)
-        {
-        case 1:
-            arr[k] = !arr[k];
-            break;
-
-        case 2:
-            start = k;
-            end = arr.size() - 1;
-            ans = -1;
-
-            while(start < end){
-                long long mid = start + (end - start)/2;
-
-                if(arr[mid]){
-                    ans = mid;
-                    end = mid - 1;
-                }else{
-                    start = mid + 1;
-                }
-            }
-
-            cout << ans << endl;
-            break;
-
-        case 3:
-            start = 0;
-            end = k;
-            ans = -1;
-
-            while(start < end){
-                long long mid = start + (end - start)/2;
-
-                if(arr[mid]){
-                    ans = mid;
-                    start = mid + 1;
-                }else{
-                    end = mid - 1;
-                }
-            }
-
-            cout << ans << endl;
-            break;
-    
-        default:
-            break;
+        if(type == 1){
+            arr[k - 1] ^= 1;
         }
-   }
 
-   return 0;
+        else if(type == 2){
+            long long ans = -1;
+
+            for(long long i = k - 1; i < n; i++){
+                if(arr[i] == 1){
+                    ans = i + 1;
+                    break;
+                }
+            }
+
+            cout << ans << endl;
+        }
+
+        else{
+            long long ans = -1;
+
+            for(long long i = k - 1; i >= 0; i--){
+                if(arr[i] == 1){
+                    ans = i + 1;
+                    break;
+                }
+            }
+
+            cout << ans << endl;
+        }
+    }
+
+    return 0;
 }
