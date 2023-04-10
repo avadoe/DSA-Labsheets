@@ -4,28 +4,27 @@
 using namespace std;
 int main()
 {
-    int n; 
+    int n;
     cin >> n;
 
-    vector<int> a(n);
-
+    vector<int> arr(n);
     for(int i = 0; i < n; i++)
-        cin >> a[i];
+        cin >> arr[i];
 
     int x, y;
     cin >> x >> y;
 
-    unordered_map<int, int> freq;
-    int count = 0;
+    unordered_map<int, int> mp;
+
+    int ans = 0;
 
     for(int i = 0; i < n; i++){
-        int diff = (a[i] - x * i) - (a[0] - y * 0);
-        if(freq.find(diff) != freq.end()){
-            count += freq[diff];
+        int diff = arr[i] - y * i;
+        if(mp.count(diff)){
+            ans += mp[diff];
         }
-
-        freq[(a[i] - x * i) - (a[0] - y * 0)]++;
+        mp[arr[i] - x * i]++;
     }
 
-    cout << count << endl;
+    cout << ans << endl;
 }
