@@ -1,75 +1,53 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
+#include <map>
 using namespace std;
-
-struct Point {
-    int x, y;
-};
-
-bool cmp(Point a, Point b) {
-    return a.x < b.x;
-}
-
-int main() {
+int main()
+{
     int n;
     cin >> n;
 
-    vector<Point> points(n);
-    for (int i = 0; i < n; i++) {
-        cin >> points[i].x >> points[i].y;
-    }
+    vector<pair<int, int> > points(n);
+    for(int i = 0; i < n; i++){
+        int a, b;
+        cin >> a >> b;
 
-    sort(points.begin(), points.end(), cmp);
+        points[i].first = a;
+        points[i].second = b;
+    }
 
     int ans = 0;
 
-    for (int i = 0; i < n; i++) {
-        for (int j = i + 1; j < n; j++) {
-            if (points[i].x == points[j].x) {
-                continue;
+    for(int i = 0; i < n; i++){
+        float x1 = points[i].first;
+        float y1 = points[i].second;
+
+        int same_X_coor_slope = 0;
+        map<float, int> mp;
+
+        for(int j = i + 1; j < n; j++){
+            float x2 = points[j].first;
+            float y2 = points[j].second;
+
+            if(x1 == x2){
+                same_X_coor_slope++;
             }
-
-            double slope = (double)(points[j].y - points[i].y) / (points[j].x - points[i].x);
-
-            vector<double> slopes;
-            for (int k = j + 1; k < n; k++) {
-                if (points[k].x == points[j].x) {
-                    continue;
-                }
-                double s = (double)(points[k].y - points[i].y) / (points[k].x - points[i].x);
-                slopes.push_back(s);
-            }
-
-            sort(slopes.begin(), slopes.end());
-
-            int cnt = 1;
-            for (int k = 1; k < slopes.size(); k++) {
-                if (slopes[k] == slopes[k - 1]) {
-                    cnt++;
-                } else {
-                    ans += cnt * (cnt - 1) / 2;
-                    cnt = 1;
-                }
-            }
-            ans += cnt * (cnt - 1) / 2;
-        }
-    }
-
-    int collinear = 0;
-    for (int i = 0; i < n; i++) {
-        for (int j = i + 1; j < n; j++) {
-            for (int k = j + 1; k < n; k++) {
-                if ((points[j].y - points[i].y) * (points[k].x - points[j].x) == 
-                    (points[k].y - points[j].y) * (points[j].x - points[i].x)) {
-                    collinear++;
-                }
+            else{
+                mp[(y2 - y1) / (x2 - x1)]++;
             }
         }
+
+        float sum_square = same_X_coor_slope * same_X_coor_slope;
+        float sum_total = same_X_coor_slope;
+
+        for(auto x : mp){
+            sum_square += x.second * x.second;
+            sum_total += x.second;
+        }
+
+        sum_total *= sum_total;
+        ans += (sum_total - sum_square) / 2;
     }
 
-    int triangles = n * (n - 1) * (n - 2) / 6 - collinear;
-    cout << triangles - ans << endl;
-
-    return 0;
+    cout << ans << endl;
 }
