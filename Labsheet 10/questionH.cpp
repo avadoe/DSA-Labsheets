@@ -1,56 +1,49 @@
-// WRONG
+// DONE
 
 #include <iostream>
-#include <queue>
-#include <unordered_map>
 #include <vector>
+#include <unordered_map>
 using namespace std;
 int main()
 {
     int n, m;
     cin >> n >> m;
 
-    vector<int> a(n), b(m);
-    for(int i = 0; i < n; i++)
-        cin >> a[i];
-
-    for(int i = 0; i < m; i++)
-        cin >> b[i];
-
     unordered_map<int, int> freq;
 
+    vector<int> C;
+
+    vector<int> A(n);
     for(int i = 0; i < n; i++){
-        freq[a[i]]++;
+        cin >> A[i];
+        freq[A[i]]++;
     }
 
-    queue<int> q;
-    vector<int> ans;
+    vector<int> B(m);
     for(int i = 0; i < m; i++){
-        if(freq[b[i]] != 0){
-            while(freq[b[i]]){
-                ans.push_back(b[i]);
-                freq[b[i]]--;
-            }
-        }else{
-            q.push(b[i]);
+        cin >> B[i];
+        while(freq[B[i]] > 0){
+            C.push_back(B[i]);
+            freq[B[i]]--;
         }
     }
 
-    vector<int> test;
-    while(!q.empty()){
-        test.push_back(q.front());
-        q.pop();
-    }
+    sort(A.begin(), A.end());
 
-    sort(test.begin(), test.end());
-    for(int i = 0; i < test.size(); i++){
-        ans.push_back(test[i]);
+    for(int i = 0; i < n; i++){
+        if(freq[A[i]] > 0){
+            while(freq[A[i]] > 0){
+                C.push_back(A[i]);
+                freq[A[i]]--;
+            }
+        }
     }
 
     for(int i = 0; i < n; i++){
-        cout << ans[i] << " ";
+        cout << C[i] << " ";
     }
 
-    cout << "\n";
+    cout << endl;
+
     return 0;
 }
