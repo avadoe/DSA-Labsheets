@@ -50,9 +50,9 @@ int main()
                 cout << "YES\n";
                 return 0;
             }else if(curr_diff < t){
-                l++;
+                r++;
             }else{
-                r--;
+                l++;
             }
         }
     }else{
