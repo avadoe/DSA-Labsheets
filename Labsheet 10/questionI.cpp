@@ -43,8 +43,8 @@ int main()
     int t = diff / 2;
 
     if(sumA > sumB){
-        r = n - 1, l = 0;
-        while(l < m && r > 0){
+        r = 0, l = 0;
+        while(l < m && r < n){
             int curr_diff = A[r] - B[l];
             if(curr_diff == t || curr_diff == -t){
                 cout << "YES\n";
