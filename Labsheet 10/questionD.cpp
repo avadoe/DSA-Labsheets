@@ -24,7 +24,7 @@ int findMax(int arr[], int n) {
 
 vector<int> pancakeSort(int arr[], int n) {
     vector<int> flips;
-    for (int i = n; i > 1; i--) {
+    for (int i = n; i >= 1; i--) {
         int maxIdx = findMax(arr, i);
 
         if (maxIdx == i-1) {
