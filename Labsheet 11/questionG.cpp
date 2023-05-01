@@ -37,7 +37,7 @@ int main()
     // Greater than length 2 Palindromes
 
     for(int len = 3; len <= n; len++){
-        for(int i = 0; i < n - len + 1; i++){
+        for(int i = 0; i < n; i++){
             int j = i + len - 1;
 
             if(s[i] == s[j] && dp[i + 1][j - 1]){
