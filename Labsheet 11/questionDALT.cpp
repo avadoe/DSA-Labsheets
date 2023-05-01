@@ -24,7 +24,7 @@ int main()
     // dp[i][j] represents the max score the current player can get if the playing area is a[i.....j]
 
     for(int len = 2; len <= n; len++){ // this outer loop iterates over all the subarray lengths possible
-        for(int i = 0; i < n - len + 1; i++){ // this inner loop iterates over all possible starting indices
+        for(int i = 0; i < n; i++){ // this inner loop iterates over all possible starting indices
             int j = i + len - 1;
 
             dp[i][j] = max(arr[i] - dp[i + 1][j], arr[j] - dp[i][j - 1]); 
