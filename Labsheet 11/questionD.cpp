@@ -11,6 +11,8 @@ int main() {
     vector<int> a(n);
     int dp[n][n];
 
+    // dp[i][j] is the max score difference a player can get over the other if the game is played on the subarray [i.....j]
+
     for(int i = 0; i < n; i++){
         for(int j = 0; j < n; j++){
             dp[i][j] = 0;

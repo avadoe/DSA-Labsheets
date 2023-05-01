@@ -15,6 +15,8 @@ int main() {
     vector<int> dp(k+1, 1e9);
     dp[0] = 0;
 
+    // dp[i] represents the minimum number of coupons to get a sum of i
+
     for (int i = 0; i < n; i++) {
         for (int j = coupons[i]; j <= k; j++) {
             dp[j] = min(dp[j], dp[j-coupons[i]]+1);
