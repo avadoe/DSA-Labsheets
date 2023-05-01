@@ -20,7 +20,7 @@ int main()
     }
 
     for(int len = 2; len <= n; len++){
-        for(int i = 1; i <= n - len + 1; i++){
+        for(int i = 1; i <= n; i++){
             int j = i + len - 1;
 
             dp[i][j] = INT_MAX;
